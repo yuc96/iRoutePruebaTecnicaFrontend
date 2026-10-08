@@ -1,0 +1,88 @@
+<div
+  class="min-h-screen w-full flex items-center justify-center p-4 bg-gradient-to-br from-slate-100 via-slate-50 to-orange-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden"
+>
+  <div class="absolute -top-24 -left-24 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <button
+    type="button"
+    (click)="theme.toggle()"
+    class="absolute top-4 right-4 p-2 rounded-xl bg-white/80 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 z-20"
+    title="Cambiar tema"
+  >
+    @if (theme.dark()) {
+      <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
+    } @else {
+      <svg class="w-4 h-4 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    }
+  </button>
+
+  <div class="max-w-md w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-2xl relative z-10 space-y-6">
+    <div class="text-center space-y-3">
+      <div class="inline-flex items-center justify-center space-x-3">
+        <img src="assets/logo-iroute.svg" alt="iRoute" class="h-16 w-auto shrink-0 drop-shadow-sm" />
+        <div class="text-left">
+          <h1 class="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100" style="letter-spacing: -0.03em">
+            <span class="font-normal text-slate-500 dark:text-slate-400">i</span>Route
+          </h1>
+          <p class="text-[9px] font-medium text-slate-500 dark:text-slate-400 -mt-1">
+            Mobile, Business Intelligence, Software.
+          </p>
+        </div>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-slate-400 pt-1">Prueba Técnica: Control de Comercios y Cuarentena</p>
+    </div>
+
+    <div class="bg-orange-500/5 dark:bg-orange-500/10 border border-orange-500/20 rounded-2xl p-4 text-xs text-slate-700 dark:text-slate-300 space-y-2">
+      <div class="flex items-center justify-between font-bold text-orange-600 dark:text-orange-400">
+        <span>Credenciales Seed</span>
+        <button type="button" (click)="fillPreset()" class="text-[11px] underline hover:text-orange-700 dark:hover:text-orange-300 font-semibold">
+          Autocompletar
+        </button>
+      </div>
+      <div class="grid grid-cols-2 gap-2 text-[11px] font-mono">
+        <div>Correo: <span class="font-bold text-slate-900 dark:text-white">admin1&#64;correo.com</span></div>
+        <div>Clave: <span class="font-bold text-slate-900 dark:text-white">Admin890&#64;</span></div>
+      </div>
+    </div>
+
+    <form (ngSubmit)="submit()" class="space-y-4">
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Correo Electrónico</label>
+        <input
+          [(ngModel)]="email"
+          name="email"
+          type="email"
+          required
+          placeholder="admin1&#64;correo.com"
+          class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white outline-none transition"
+        />
+      </div>
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Contraseña</label>
+        <input
+          [(ngModel)]="password"
+          name="password"
+          type="password"
+          required
+          placeholder="••••••••"
+          class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white outline-none transition"
+        />
+      </div>
+      @if (error()) {
+        <p class="text-xs font-semibold text-red-500">{{ error() }}</p>
+      }
+      <button
+        type="submit"
+        [disabled]="loading()"
+        class="w-full py-3 px-4 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold rounded-xl shadow-lg shadow-orange-500/25 transition active:scale-[0.99] disabled:opacity-60"
+      >
+        {{ loading() ? 'Ingresando...' : 'Ingresar al Sistema' }}
+      </button>
+    </form>
+  </div>
+</div>
